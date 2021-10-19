@@ -1,3 +1,4 @@
+import { identifierModuleUrl } from '@angular/compiler';
 import { getInterpolationArgsLength } from '@angular/compiler/src/render3/view/util';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import {} from 'googlemaps';
@@ -15,7 +16,7 @@ export class AppComponent implements OnInit {
   map: google.maps.Map;
   latitude: any = 54.9553775;
   longitude: any = 82.9969769;
-  info = {lat:undefined, lng:undefined};
+  info = {lat:54.9553775, lng:82.9969769};
   marker: any;
 
 
@@ -23,12 +24,14 @@ export class AppComponent implements OnInit {
   ngOnInit(){}
   ngAfterViewInit(){
   this.loadMap();
+
   }
 
 loadMap(){
   let latLng = new google.maps.LatLng(
     this.latitude, this.longitude
   );
+
   let mapOptions = {
     center: latLng,
     zoom: 9,
@@ -58,9 +61,24 @@ addMarker(location:any, map:any) {
         position: location,
         map: map
       });
-
-
 }
 
+saveMarker(){
+  let pointes = [this.info.lat, this.info.lng]
+  if(localStorage.getItem('Координаты') == null){
+    localStorage.setItem('Координаты', '[]')
+  }
+  var old_data = JSON.parse(localStorage.getItem('Координаты'));
+  old_data.push(pointes);
+
+  localStorage.setItem('Координаты', JSON.stringify(old_data));
 }
+
+clear(){
+  localStorage.clear();
+}
+}
+
+
+
 

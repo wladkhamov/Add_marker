@@ -3,9 +3,10 @@
 
     <span>широта<h4 id="Lt">{{info.lat}}</h4></span>
     <span>долгота<h4 id="Lg">{{info.lng}}</h4></span>
+    <button mat-raised-button (click)="saveMarker()" id="Save">Сохранить координату</button>
+<button mat-raised-button (click)="clear()">Очистить</button>
     </div>
   <div #map style="width: 70%; height: 800px;"></div>
-
 
 
 </div>
