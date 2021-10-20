@@ -4,9 +4,17 @@ map{
   background-color: red;
 }
 #info{
-  text-align: center;
+text-align: center;
 top: 0;
 background-color: darkgray;
+}
+#info_2{
+  display: block;
+  margin: 0 auto;
+  text-align:left;
+  width: max-content;
+  padding: 0px 30px;
+
 }
 h1{
   margin-top: 100px;

@@ -1,12 +1,19 @@
 <div class="container">
   <div id ="info" style="height: 800px; width: 30%; float: left;"><h1>Координаты поставленного маркера:</h1>
-
-    <span>широта<h4 id="Lt">{{info.lat}}</h4></span>
-    <span>долгота<h4 id="Lg">{{info.lng}}</h4></span>
+    <div id="info_2">
+    <span>Широта<h4 id="Lt">{{info.lat}}</h4></span>
+    <span>Долгота<h4 id="Lg">{{info.lng}}</h4></span>
+    <span>Страна<h4 id="cntr">{{info.country}}</h4></span>
+    <span>Город<h4 >{{info.city}}</h4></span>
+    <span>Пригород<h4 >{{info.suburb}}</h4></span>
+  </div>
     <button mat-raised-button (click)="saveMarker()" id="Save">Сохранить координату</button>
 <button mat-raised-button (click)="clear()">Очистить</button>
     </div>
   <div #map style="width: 70%; height: 800px;"></div>
+  <div>
+    <span></span>
+  </div>
 
 
 </div>
