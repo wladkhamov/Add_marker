@@ -85,7 +85,8 @@ MoveMarker(){
         this.arrayKoord=arrayAll[i];
         this.info.lat =this.arrayKoord[0];
         this.info.lng = this.arrayKoord[1];
-        this.markerSetInfoPosition({lat: this.info.lng, lng: this.info.lng}, this.map)
+        this.markerSetInfoPosition({lat: this.info.lat, lng: this.info.lng}, this.map)
+        this.ngOnInit();
       }, i*1500)
     })(i);
   }
