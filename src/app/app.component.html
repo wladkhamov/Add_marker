@@ -8,7 +8,8 @@
     <span>Пригород<h4 >{{info.suburb}}</h4></span>
   </div>
     <button mat-raised-button (click)="saveMarker()" id="Save">Сохранить координату</button>
-<button mat-raised-button (click)="clear()">Очистить</button>
+    <button mat-raised-button (click)="clear()">Очистить</button>
+    <button mat-raised-button (click)="MoveMarker()">Просмотр сохранений</button>
     </div>
   <div #map style="width: 70%; height: 800px;"></div>
   <div>
