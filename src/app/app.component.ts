@@ -1,4 +1,4 @@
-import { identifierModuleUrl, jsDocComment, LocalizedString, SelectorMatcher } from '@angular/compiler';
+import { identifierModuleUrl, jsDocComment, LocalizedString, SelectorMatcher, ThrowStmt } from '@angular/compiler';
 import { getInterpolationArgsLength } from '@angular/compiler/src/render3/view/util';
 import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import {} from 'googlemaps';
@@ -24,14 +24,24 @@ export class AppComponent implements OnInit {
   marker: any;
   old_data: any;
   arrayKoord: any;
+  infowindow: any;
+  contentString: any;
+
+
+
+
+
+
 
 
 
   ngAfterViewInit(){
+
   this.loadMap();
   }
 
 loadMap(){
+
   let latLng = new google.maps.LatLng(
     this.latitude, this.longitude
   );
@@ -44,6 +54,10 @@ loadMap(){
   google.maps.event.addListener(this.map, "click", (event) => {
     this.addMarker(event.latLng, this.map);
   });
+  this.infowindow = new google.maps.InfoWindow({
+    content: this.contentString
+  });
+
 }
 
 addMarker(location:any, map:any) {
@@ -51,6 +65,19 @@ addMarker(location:any, map:any) {
   this.info.lng = location.lng();
   this.ngOnInit();
   this.markerSetInfoPosition(location, map)
+
+  this.contentString =
+  '<h1>'+this.info.country+'</<h1><h2>'+this.info.city+'</<h2>';
+
+  this.marker.addListener('click', ()=> {
+  this.infowindow.open(this.map, this.marker);
+});
+  this.infowindow.setContent(this.contentString)
+
+
+  this.infowindow.addListener('closeclick', ()=>{
+  this.infowindow.close()
+});
 }
 
 markerSetInfoPosition(location:any, map:any){
@@ -97,6 +124,7 @@ clear(){
 }
 
   ngOnInit(){
+
     this._modalS.get(this.info.lat, this.info.lng).subscribe((response: any)=>{response = response;
     /*console.log(response)*/
     this.info.country=response.results[0].components.country;
