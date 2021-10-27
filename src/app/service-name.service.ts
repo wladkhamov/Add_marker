@@ -11,7 +11,7 @@ export class ServiceNameService {
 
 }
   get(lat: number, lng: number): any {
-  return this.http.get('https://api.opencagedata.com/geocode/v1/json?q='+lat+ '+' +lng+'&key=be6a1e21cd134491aaab4f29e4a84907&pretty=1')
+  return this.http.get('https://api.opencagedata.com/geocode/v1/json?q='+lat+ '+' +lng+'&key=AIzaSyDNxReUFeJT0x0JskiM5kOFiDt1IZtMLCQ&pretty=1')
   }
 
 }

@@ -26,22 +26,16 @@ export class AppComponent implements OnInit {
   arrayKoord: any;
   infowindow: any;
   contentString: any;
+  poly: any;
 
 
 
 
 
 
-
-
-
-  ngAfterViewInit(){
-
-  this.loadMap();
-  }
+ngAfterViewInit(){this.loadMap();}
 
 loadMap(){
-
   let latLng = new google.maps.LatLng(
     this.latitude, this.longitude
   );
@@ -66,15 +60,11 @@ addMarker(location:any, map:any) {
   this.ngOnInit();
   this.markerSetInfoPosition(location, map)
 
-  this.contentString =
-  '<h1>'+this.info.country+'</<h1><h2>'+this.info.city+'</<h2>';
-
+  this.contentString ='<h1>'+this.info.country+'</<h1><h2>'+this.info.city+'</<h2>';
+  this.infowindow.setContent(this.contentString)
   this.marker.addListener('click', ()=> {
   this.infowindow.open(this.map, this.marker);
 });
-  this.infowindow.setContent(this.contentString)
-
-
   this.infowindow.addListener('closeclick', ()=>{
   this.infowindow.close()
 });
@@ -102,27 +92,47 @@ saveMarker(){
 }
 
 MoveMarker(){
+  const flightPlanCoordinates = [
+
+  ];
+    this.poly = new google.maps.Polyline({
+
+    strokeColor: "#FF0000",
+    strokeOpacity: 1.0,
+    strokeWeight: 3
+  });
+
+  this.poly.setMap(this.map);
   let arrayAll = JSON.parse(localStorage.getItem('Координаты'))
   var arrayFromStroage = JSON.parse(localStorage.getItem("Координаты"));
   var arrayLength = arrayFromStroage.length;
 
   for (var i =0; i<arrayLength; i++){
+
     ((i) =>{
       setTimeout(() =>  {
+
         this.arrayKoord=arrayAll[i];
         this.info.lat =this.arrayKoord[0];
         this.info.lng = this.arrayKoord[1];
         this.markerSetInfoPosition({lat: this.info.lat, lng: this.info.lng}, this.map)
         this.ngOnInit();
+        const path = this.poly.getPath();
+        console.log(path)
+
+          path.push(new google.maps.LatLng(this.info.lat,this.info.lng))
+
       }, i*1500)
     })(i);
+
   }
 }
-
 clear(){
   localStorage.clear();
 }
-
+ClearPoly(){
+  this.poly.setMap(null)
+}
   ngOnInit(){
 
     this._modalS.get(this.info.lat, this.info.lng).subscribe((response: any)=>{response = response;
