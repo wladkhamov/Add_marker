@@ -55,6 +55,7 @@ loadMap(){
 }
 
 addMarker(location:any, map:any) {
+  this.ClearPoly();
   this.info.lat = location.lat();
   this.info.lng = location.lng();
   this.ngOnInit();
